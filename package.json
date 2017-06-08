@@ -1,0 +1,19 @@
+{
+  "name": "weather",
+  "version": "0.1.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alik0211/weather.git"
+  },
+  "author": "alik0211",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alik0211/weather/issues"
+  },
+  "homepage": "https://github.com/alik0211/weather#readme"
+}

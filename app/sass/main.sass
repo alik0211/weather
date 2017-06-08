@@ -1,0 +1,72 @@
+@import "../../node_modules/@material/toolbar/dist/mdc.toolbar.min"
+@import "../../node_modules/@material/dialog/dist/mdc.dialog.min"
+@import "../../node_modules/@material/textfield/dist/mdc.textfield.min"
+@import "../../node_modules/@material/button/dist/mdc.button.min"
+
+html,
+body
+  padding: 0
+  margin: 0
+  height: 100%
+  width: 100%
+  font-family: 'Roboto', 'Helvetica', sans-serif
+  font-weight: 400
+  color: #444
+  font-display: optional
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+body
+  background-color: #ececec
+
+.github
+  height: 24px
+  width: 24px
+  background-image: url(../images/github.png)
+  background-repeat: no-repeat
+  background-size: contain
+
+.card
+  padding: 16px
+  position: relative
+  box-sizing: border-box
+  background-color: #fff
+  border-radius: 2px
+  margin: 16px
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)
+  .description
+    font-size: 1.1em
+  .location
+    font-size: 1.75em
+  .current
+    display: flex
+    .icon
+      width: 128px
+      height: 128px
+      background-repeat: no-repeat
+      background-size: contain
+    .visual
+      display: flex
+      font-size: 4em
+      .scale
+        font-size: 0.5em
+        vertical-align: super
+    .visual, .description
+      flex-grow: 1
+    .wind:before
+      content: "Wind: "
+      color: #888
+    .clouds:before
+      content: "Clouds: "
+      color: #888
+
+@media (max-width: 450px)
+  .card
+    .description
+      font-size: 0.9em
+    .current
+      .icon
+        width: 96px
+        height: 96px
+      .visual
+        font-size: 3em
