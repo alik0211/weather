@@ -1,4 +1,3 @@
-@import "../../node_modules/@material/toolbar/dist/mdc.toolbar.min"
 @import "../../node_modules/@material/dialog/dist/mdc.dialog.min"
 @import "../../node_modules/@material/textfield/dist/mdc.textfield.min"
 @import "../../node_modules/@material/button/dist/mdc.button.min"
@@ -70,3 +69,50 @@ body
         height: 96px
       .visual
         font-size: 3em
+
+.toolbar,
+.toolbar__row
+  display: flex
+  position: relative
+  width: 100%
+  box-sizing: border-box
+
+.toolbar
+  flex-direction: column
+  justify-content: space-between
+  background-color: #3f51b5
+  color: #fff
+
+.toolbar__row
+  height: auto
+  min-height: 64px
+  padding: 20px 28px
+
+.toolbar__section
+  display: inline-flex
+  flex: 1
+  align-items: flex-start
+  justify-content: center
+  min-width: 0
+  z-index: 1
+  &--align-start
+    justify-content: flex-start
+    order: -1
+  &--align-end
+    justify-content: flex-end
+    order: 1
+
+.toolbar__title
+  font-family: 'Roboto', 'Helvetica', sans-serif
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+  font-size: 1.25rem
+  font-weight: 500
+  letter-spacing: .02em
+  line-height: 2rem
+  margin: 0
+  line-height: 1.5rem
+  text-overflow: ellipsis
+  white-space: nowrap
+  overflow: hidden
+  z-index: 1
