@@ -1,5 +1,3 @@
-// @import "../../node_modules/@material/dialog/dist/mdc.dialog.min"
-
 html,
 body
   padding: 0
@@ -7,11 +5,11 @@ body
   height: 100%
   width: 100%
   font-family: 'Roboto', 'Helvetica', sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
   font-weight: 400
   color: #444
   font-display: optional
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
 
 body
   background-color: #ececec
@@ -231,8 +229,6 @@ body
   flex-direction: column
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12)
   width: calc(100% - 30px)
-  // min-width: 640px
-  // max-width: 865px
   max-width: 243px
   transform: translateY(150px) scale(0.8)
   border-radius: 2px
@@ -285,3 +281,7 @@ body
   .dialog__surface
     transform: translateY(0) scale(1)
     opacity: 1
+
+@media (max-width: 450px)
+  .dialog__surface
+    max-width: 270px
