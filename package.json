@@ -1,6 +1,6 @@
 {
   "name": "weather",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
@@ -18,8 +18,7 @@
   "homepage": "https://github.com/alik0211/weather#readme",
   "dependencies": {
     "@material/button": "^0.3.7",
-    "@material/dialog": "^0.3.0",
-    "@material/textfield": "^0.2.10"
+    "@material/dialog": "^0.3.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.12",
