@@ -3,7 +3,7 @@ let userCity = localStorage.getItem('city');
 if (userCity === null) {
   toggleDialog(true);
 
-  document.querySelector('.mdc-dialog__footer__button').addEventListener('click', function() {
+  document.querySelector('.button').addEventListener('click', function() {
     userCity = document.getElementById('city').value;
     toggleDialog(false);
     getWeather(userCity).then(data => updateWeather(data));
@@ -25,9 +25,9 @@ if ('caches' in window) {
 
 function toggleDialog(visible) {
   if (visible) {
-    document.querySelector('.mdc-dialog').classList.add('mdc-dialog--open');
+    document.querySelector('.dialog').classList.add('dialog--open');
   } else {
-    document.querySelector('.mdc-dialog').classList.remove('mdc-dialog--open');
+    document.querySelector('.dialog').classList.remove('dialog--open');
   }
 }
 
@@ -51,10 +51,10 @@ function updateWeather(data) {
   // document.querySelector('.loader').setAttribute('hidden', true);
 }
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('./sw.js')
-    .then(function() {
-      console.log('Service Worker Registered');
-    });
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker
+//     .register('./sw.js')
+//     .then(function() {
+//       console.log('Service Worker Registered');
+//     });
+// }

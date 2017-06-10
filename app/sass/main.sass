@@ -1,4 +1,4 @@
-@import "../../node_modules/@material/dialog/dist/mdc.dialog.min"
+// @import "../../node_modules/@material/dialog/dist/mdc.dialog.min"
 
 html,
 body
@@ -201,3 +201,87 @@ body
     color: rgba(0, 0, 0, 0.26)
     cursor: default
     pointer-events: none
+
+.dialog
+  display: flex
+  visibility: hidden
+  z-index: 2
+  position: fixed
+  top: 0
+  left: 0
+  align-items: center
+  justify-content: center
+  width: 100%
+  height: 100%
+
+.dialog__backdrop
+  position: fixed
+  top: 0
+  left: 0
+  align-items: center
+  justify-content: center
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.87)
+  opacity: 0
+  z-index: -1
+
+.dialog__surface
+  display: inline-flex
+  flex-direction: column
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12)
+  width: calc(100% - 30px)
+  // min-width: 640px
+  // max-width: 865px
+  max-width: 243px
+  transform: translateY(150px) scale(0.8)
+  border-radius: 2px
+  background-color: #fff
+  opacity: 0
+
+.dialog__header
+  display: flex
+  align-items: center
+  padding: 24px 24px 0
+
+.dialog__header__title
+  flex: 1
+  margin: 0
+  font-size: 1.25rem
+  font-weight: 500
+  letter-spacing: .02em
+  line-height: 2rem
+
+.dialog__body, .dialog__header__title
+  font-family: 'Roboto', 'Helvetica', sans-serif
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+
+.dialog__body
+  margin-top: 20px
+  padding: 0 24px 24px
+  color: rgba(0, 0, 0, 0.54)
+  font-size: .875rem
+  font-weight: 400
+  letter-spacing: .04em
+  line-height: 1.25rem
+
+.dialog__footer
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  justify-content: flex-end
+  padding: 8px
+
+.dialog__footer__button
+  margin-right: 8px
+  &:last-child
+    margin-right: 0
+
+.dialog--open
+  visibility: visible
+  .dialog__backdrop
+    opacity: .3
+  .dialog__surface
+    transform: translateY(0) scale(1)
+    opacity: 1
