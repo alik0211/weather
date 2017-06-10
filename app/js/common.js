@@ -3,7 +3,7 @@ let userCity = localStorage.getItem('city');
 if (userCity === null) {
   toggleDialog(true);
 
-  document.querySelector('.mdc-button').addEventListener('click', function() {
+  document.querySelector('.mdc-dialog__footer__button').addEventListener('click', function() {
     userCity = document.getElementById('city').value;
     toggleDialog(false);
     getWeather(userCity).then(data => updateWeather(data));
