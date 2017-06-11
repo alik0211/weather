@@ -1,11 +1,11 @@
 var dataCacheName = 'weatherData-v1';
-var cacheName = 'weather-v4';
+var cacheName = 'weather-v5';
 var filesToCache = [
   '/',
   '/index.html',
   '/js/common.js',
   '/css/main.css',
-  '/images/github.png',
+  '/images/github.svg',
   '/images/01d.svg', '/images/01n.svg',
   '/images/02d.svg', '/images/02n.svg',
   '/images/03d.svg', '/images/03n.svg',

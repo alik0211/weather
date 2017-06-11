@@ -1,0 +1,35 @@
+.location
+  font-size: 1.75em
+.description
+  font-size: 1.1em
+.current
+  display: flex
+  .icon
+    width: 128px
+    height: 128px
+    background-repeat: no-repeat
+    background-size: contain
+  .visual
+    display: flex
+    font-size: 4em
+    .scale
+      font-size: 0.5em
+      vertical-align: super
+  .visual, .description
+    flex-grow: 1
+  .wind:before
+    content: "Wind: "
+    color: #888
+  .clouds:before
+    content: "Clouds: "
+    color: #888
+
+@media (max-width: 450px)
+  .description
+    font-size: 0.9em
+  .current
+    .icon
+      width: 96px
+      height: 96px
+    .visual
+      font-size: 3em

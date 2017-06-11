@@ -15,7 +15,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src('app/sass/*.sass')
+  return gulp.src('app/sass/main.sass')
            .pipe(sass())
            .pipe(autoprefixer(['last 10 versions']))
            .pipe(cleanCSS({ level: {
@@ -26,7 +26,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', ['browser-sync', 'sass'], function() {
-  gulp.watch('app/sass/*.sass', ['sass']);
+  gulp.watch('app/sass/main.sass', ['sass']);
   gulp.watch('app/js/*.js', browserSync.reload);
   gulp.watch('app/*.html', browserSync.reload);
 });
