@@ -1,5 +1,5 @@
 var dataCacheName = 'weatherData-v1';
-var cacheName = 'weather-v5';
+var cacheName = 'weather-v6';
 var filesToCache = [
   '/',
   '/index.html',
