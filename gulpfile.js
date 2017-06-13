@@ -36,7 +36,8 @@ gulp.task('build', ['sass'], function() {
   gulp.src([
     'app/**/*.svg',
     'app/**/*.png',
-    'app/manifest.json'
+    'app/manifest.json',
+    'app/sw.js'
   ]).pipe(gulp.dest('dist'));
 });
 
