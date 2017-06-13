@@ -1,5 +1,7 @@
 const gulp         = require('gulp'),
       sass         = require('gulp-sass'),
+      babel        = require('gulp-babel'),
+      uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
       browserSync  = require('browser-sync'),
@@ -27,7 +29,10 @@ gulp.task('build', ['sass'], function() {
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
     .pipe(gulp.dest('dist/css'));
 
-  gulp.src('app/js/*.js').pipe(gulp.dest('dist/js'));
+  gulp.src('app/js/*.js')
+    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
 
   gulp.src('app/*.html')
     .pipe(htmlmin({ collapseWhitespace: true }))
