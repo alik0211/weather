@@ -1,5 +1,6 @@
 const gulp         = require('gulp'),
       sass         = require('gulp-sass'),
+      htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
       browserSync  = require('browser-sync'),
       autoprefixer = require('gulp-autoprefixer');
@@ -18,15 +19,29 @@ gulp.task('sass', function() {
   return gulp.src('app/sass/main.sass')
            .pipe(sass())
            .pipe(autoprefixer(['last 10 versions']))
-           .pipe(cleanCSS({ level: {
-             1: { specialComments: 0 }
-           }}))
-           .pipe(gulp.dest('app/css'))
-           .pipe(browserSync.reload({stream: true}));
+           .pipe(gulp.dest('app/css'));
+});
+
+gulp.task('build', ['sass'], function() {
+  gulp.src('app/css/main.css')
+    .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
+    .pipe(gulp.dest('dist/css'));
+
+  gulp.src('app/js/*.js').pipe(gulp.dest('dist/js'));
+
+  gulp.src('app/*.html')
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist'));
+
+  gulp.src([
+    'app/**/*.svg',
+    'app/**/*.png',
+    'app/manifest.json'
+  ]).pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', ['browser-sync', 'sass'], function() {
-  gulp.watch('app/sass/main.sass', ['sass']);
+  gulp.watch('app/sass/main.sass', ['sass', browserSync.reload]);
   gulp.watch('app/js/*.js', browserSync.reload);
   gulp.watch('app/*.html', browserSync.reload);
 });

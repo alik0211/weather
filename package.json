@@ -1,10 +1,11 @@
 {
   "name": "weather",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp watch"
+    "start": "gulp",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -16,12 +17,12 @@
     "url": "https://github.com/alik0211/weather/issues"
   },
   "homepage": "https://github.com/alik0211/weather#readme",
-  "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.18.12",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-clean-css": "^3.4.1",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-sass": "^3.1.0"
   }
 }
