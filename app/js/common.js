@@ -40,13 +40,13 @@ function getWeather(city) {
 function updateWeather(data) {
   const card = document.querySelector('.card');
 
-  card.querySelector('.location').textContent = userCity;
-  card.querySelector('.description').textContent = data.weather[0].description;
+  card.querySelector('.card__location').textContent = userCity;
+  card.querySelector('.card__description').textContent = data.weather[0].description;
 
-  card.querySelector('.current .temperature .value').textContent = Math.round(data.main.temp);
-  card.querySelector('.current .icon').style.backgroundImage = `url("images/${data.weather[0].icon}.svg")`;
-  card.querySelector('.current .wind .value').textContent = Math.round(data.wind.speed);
-  card.querySelector('.current .clouds .value').textContent = data.clouds.all;
+  card.querySelector('.visual__value').textContent = Math.round(data.main.temp);
+  card.querySelector('.visual__icon').style.backgroundImage = `url("images/${data.weather[0].icon}.svg")`;
+  card.querySelector('.description__wind .description__value').textContent = Math.round(data.wind.speed);
+  card.querySelector('.description__clouds .description__value').textContent = data.clouds.all;
 
   // document.querySelector('.loader').setAttribute('hidden', true);
 }
