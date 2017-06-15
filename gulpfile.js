@@ -1,4 +1,5 @@
-const gulp         = require('gulp'),
+const del          = require('del'),
+      gulp         = require('gulp'),
       sass         = require('gulp-sass'),
       babel        = require('gulp-babel'),
       uglify       = require('gulp-uglify'),
@@ -24,7 +25,11 @@ gulp.task('sass', function() {
            .pipe(gulp.dest('app/css'));
 });
 
-gulp.task('build', ['sass'], function() {
+gulp.task('removedist', function() {
+  return del.sync('dist');
+});
+
+gulp.task('build', ['removedist', 'sass'], function() {
   gulp.src('app/css/main.css')
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
     .pipe(gulp.dest('dist/css'));
