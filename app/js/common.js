@@ -48,7 +48,7 @@ function updateWeather(data) {
   card.querySelector('.description__wind .description__value').textContent = Math.round(data.wind.speed);
   card.querySelector('.description__clouds .description__value').textContent = data.clouds.all;
 
-  // document.querySelector('.loader').setAttribute('hidden', true);
+  document.querySelector('.loader').setAttribute('hidden', true);
 }
 
 if ('serviceWorker' in navigator) {
