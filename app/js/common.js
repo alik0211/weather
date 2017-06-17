@@ -6,41 +6,43 @@ if (userCity === null) {
   document.querySelector('.button').addEventListener('click', function() {
     userCity = document.getElementById('city').value;
     toggleDialog(false);
-    getWeather(userCity).then(data => updateWeather(data));
+    getWeather(userCity).then(data => updateWeather(data, userCity));
     localStorage.setItem('city', userCity);
   });
 } else {
-  getWeather(userCity).then(data => updateWeather(data));
+  getWeather(userCity).then(data => updateWeather(data, userCity));
 }
 
 if ('caches' in window) {
-  caches.match('https://alik0211.tk/weather0211/data.php?city=' + userCity).then(function(response) {
-    if (response) {
-      response.json().then(function(data) {
-        updateWeather(data);
-      });
-    }
-  });
+  caches.match('https://alik0211.tk/weather0211/data.php?city=' + userCity)
+    .then(function(response) {
+      if (response) {
+        response.json().then(function(data) {
+          updateWeather(data, userCity);
+        });
+      }
+    });
 }
 
 function toggleDialog(visible) {
+  const dialog = document.querySelector('.dialog');
+
   if (visible) {
-    document.querySelector('.dialog').classList.add('dialog--open');
+    dialog.classList.add('dialog--open');
   } else {
-    document.querySelector('.dialog').classList.remove('dialog--open');
+    dialog.classList.remove('dialog--open');
   }
 }
 
 function getWeather(city) {
-  return fetch('https://alik0211.tk/weather0211/data.php?city=' + userCity).then(response => {
-    return response.json();
-  });
+  return fetch('https://alik0211.tk/weather0211/data.php?city=' + city)
+    .then(response => response.json());
 }
 
-function updateWeather(data) {
+function updateWeather(data, city) {
   const card = document.querySelector('.card');
 
-  card.querySelector('.card__location').textContent = userCity;
+  card.querySelector('.card__location').textContent = city;
   card.querySelector('.card__description').textContent = data.weather[0].description;
 
   card.querySelector('.visual__value').textContent = Math.round(data.main.temp);
