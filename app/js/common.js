@@ -49,6 +49,7 @@ function updateWeather(data, city) {
   card.querySelector('.visual__icon').style.backgroundImage = `url("images/${data.weather[0].icon}.svg")`;
   card.querySelector('.description__wind .description__value').textContent = Math.round(data.wind.speed);
   card.querySelector('.description__clouds .description__value').textContent = data.clouds.all;
+  card.querySelector('.description__pressure .description__value').textContent = Math.round(data.main.pressure);
 
   document.querySelector('.loader').setAttribute('hidden', true);
 }
