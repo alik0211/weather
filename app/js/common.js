@@ -13,16 +13,21 @@ if ('caches' in window) {
 
 if (userCity === null) {
   toggleDialog(true);
-
-  document.querySelector('.button').addEventListener('click', function() {
-    userCity = document.getElementById('city').value;
-    toggleDialog(false);
-    getWeather(userCity).then(data => updateWeather(data, userCity));
-    localStorage.city = userCity;
-  });
 } else {
   getWeather(userCity).then(data => updateWeather(data, userCity));
 }
+
+document.getElementById('butEdit').addEventListener('click', function() {
+  document.getElementById('city').value = userCity;
+  toggleDialog(true);
+});
+
+document.getElementById('butSetCity').addEventListener('click', function() {
+  userCity = document.getElementById('city').value;
+  toggleDialog(false);
+  getWeather(userCity).then(data => updateWeather(data, userCity));
+  localStorage.city = userCity;
+});
 
 function toggleDialog(visible) {
   const dialog = document.querySelector('.dialog');
@@ -42,7 +47,7 @@ function getWeather(city) {
 function updateWeather(data, city) {
   const card = document.querySelector('.card');
 
-  card.querySelector('.card__location').textContent = city;
+  card.querySelector('.location__name').textContent = city;
   card.querySelector('.card__description').textContent =
     data.weather[0].description;
 

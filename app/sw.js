@@ -1,10 +1,11 @@
 const dataCacheName = 'weatherData-v1';
-const cacheName = 'weather-v11';
+const cacheName = 'weather-v12';
 const filesToCache = [
   '/',
   '/index.html',
   '/js/common.js',
   '/css/main.css',
+  '/images/edit.svg',
   '/images/github.svg',
   '/images/01d.svg', '/images/01n.svg',
   '/images/02d.svg', '/images/02n.svg',
