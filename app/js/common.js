@@ -65,9 +65,11 @@ function updateWeather(data, city) {
 }
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('./sw.js')
+  navigator.serviceWorker.register('./sw.js')
     .then(function() {
       console.log('Service Worker Registered');
+    })
+    .catch(function(err) {
+      console.log('Service Worker Filed to Register', err);
     });
 }
