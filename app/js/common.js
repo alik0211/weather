@@ -7,12 +7,12 @@
     dialog: document.querySelector('.dialog')
   };
 
-  document.getElementById('butEdit').addEventListener('click', function() {
+  document.querySelector('.card__location').addEventListener('click', () => {
     document.getElementById('city').value = app.city;
     app.toggleDialog(true);
   });
 
-  document.getElementById('butSetCity').addEventListener('click', function() {
+  document.getElementById('butSetCity').addEventListener('click', () => {
     app.city = document.getElementById('city').value;
     app.toggleDialog(false);
     app.getWeather(app.city);
@@ -39,7 +39,7 @@
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', function() {
+    xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         let data = JSON.parse(xhr.response);
         app.updateWeather(data);
@@ -52,7 +52,7 @@
   app.updateWeather = function(data) {
     const card = document.querySelector('.card');
 
-    card.querySelector('.location__name').textContent = data.name;
+    card.querySelector('.card__location').textContent = data.name;
     card.querySelector('.card__description').textContent =
       data.weather[0].description;
 
@@ -77,13 +77,13 @@
     app.getWeather(app.city);
   }
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-      .then(function() {
-        console.log('Service Worker Registered');
-      })
-      .catch(function(err) {
-        console.log('Service Worker Filed to Register', err);
-      });
-  }
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register('./sw.js')
+  //     .then(() => {
+  //       console.log('Service Worker Registered');
+  //     })
+  //     .catch((err) => {
+  //       console.log('Service Worker Filed to Register', err);
+  //     });
+  // }
 })();
