@@ -1,75 +1,89 @@
-let userCity = localStorage.getItem('city');
+(function() {
+  'use strict';
 
-if ('caches' in window) {
-  caches.match('https://alik0211.tk/weather0211/data.php?city=' + userCity)
-    .then(function(response) {
-      if (response) {
-        response.json().then(function(data) {
-          updateWeather(data, userCity);
-        });
+  const app = {
+    city: undefined,
+    spinner: document.querySelector('.loader'),
+    dialog: document.querySelector('.dialog')
+  };
+
+  document.getElementById('butEdit').addEventListener('click', function() {
+    document.getElementById('city').value = app.city;
+    app.toggleDialog(true);
+  });
+
+  document.getElementById('butSetCity').addEventListener('click', function() {
+    app.city = document.getElementById('city').value;
+    app.toggleDialog(false);
+    app.getWeather(app.city);
+    localStorage.city = app.city;
+  });
+
+  app.toggleDialog = function(visible) {
+    if (visible) {
+      app.dialog.classList.add('dialog--open');
+    } else {
+      app.dialog.classList.remove('dialog--open');
+    }
+  };
+
+  app.getWeather = function(city) {
+    const url = 'https://alik0211.tk/weather0211/data.php?city=' + city;
+
+    if ('caches' in window) {
+      caches.match(url).then(response => {
+        if (response) {
+          response.json().then(data => app.updateWeather(data));
+        }
+      });
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', function() {
+      if (xhr.status === 200) {
+        let data = JSON.parse(xhr.response);
+        app.updateWeather(data);
       }
     });
-}
+    xhr.open('GET', url);
+    xhr.send();
+  };
 
-if (userCity === null) {
-  toggleDialog(true);
-} else {
-  getWeather(userCity).then(data => updateWeather(data, userCity));
-}
+  app.updateWeather = function(data) {
+    const card = document.querySelector('.card');
 
-document.getElementById('butEdit').addEventListener('click', function() {
-  document.getElementById('city').value = userCity;
-  toggleDialog(true);
-});
+    card.querySelector('.location__name').textContent = data.name;
+    card.querySelector('.card__description').textContent =
+      data.weather[0].description;
 
-document.getElementById('butSetCity').addEventListener('click', function() {
-  userCity = document.getElementById('city').value;
-  toggleDialog(false);
-  getWeather(userCity).then(data => updateWeather(data, userCity));
-  localStorage.city = userCity;
-});
+    card.querySelector('.visual__value').textContent =
+      Math.round(data.main.temp);
+    card.querySelector('.visual__icon').style.backgroundImage =
+      `url("images/${data.weather[0].icon}.svg")`;
+    card.querySelector('.description__wind .description__value').textContent =
+      Math.round(data.wind.speed);
+    card.querySelector('.description__clouds .description__value').textContent =
+      data.clouds.all;
 
-function toggleDialog(visible) {
-  const dialog = document.querySelector('.dialog');
+    app.spinner.setAttribute('hidden', true);
+  };
 
-  if (visible) {
-    dialog.classList.add('dialog--open');
+
+  app.city = localStorage.city;
+
+  if (app.city === undefined) {
+    app.toggleDialog(true);
   } else {
-    dialog.classList.remove('dialog--open');
+    app.getWeather(app.city);
   }
-}
 
-function getWeather(city) {
-  return fetch('https://alik0211.tk/weather0211/data.php?city=' + city)
-    .then(response => response.json());
-}
-
-function updateWeather(data, city) {
-  const card = document.querySelector('.card');
-
-  card.querySelector('.location__name').textContent = city;
-  card.querySelector('.card__description').textContent =
-    data.weather[0].description;
-
-  card.querySelector('.visual__value').textContent = Math.round(data.main.temp);
-  card.querySelector('.visual__icon').style.backgroundImage =
-    `url("images/${data.weather[0].icon}.svg")`;
-  card.querySelector('.description__wind .description__value').textContent =
-    Math.round(data.wind.speed);
-  card.querySelector('.description__clouds .description__value').textContent =
-    data.clouds.all;
-  card.querySelector('.description__pressure .description__value').textContent =
-    Math.round(data.main.pressure);
-
-  document.querySelector('.loader').setAttribute('hidden', true);
-}
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(function() {
-      console.log('Service Worker Registered');
-    })
-    .catch(function(err) {
-      console.log('Service Worker Filed to Register', err);
-    });
-}
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+      .then(function() {
+        console.log('Service Worker Registered');
+      })
+      .catch(function(err) {
+        console.log('Service Worker Filed to Register', err);
+      });
+  }
+})();

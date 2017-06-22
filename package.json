@@ -1,7 +1,7 @@
 {
   "name": "weather",
-  "version": "0.8.0",
-  "description": "Fast, simple, progressive application.",
+  "version": "1.0.0",
+  "description": "Application for all devices",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
