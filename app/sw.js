@@ -1,4 +1,4 @@
-const dataCacheName = 'weatherData-v1';
+const dataCacheName = 'weatherData-v2';
 const cacheName = 'weather-v15';
 const filesToCache = [
   '/',
@@ -45,7 +45,7 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
   console.log('[Service Worker] Fetch', e.request.url);
-  const dataUrl = 'https://alik0211.tk/weather0211/data.php';
+  const dataUrl = 'https://alik0211.tk/weather0211/forecast.daily.php';
   if (e.request.url.indexOf(dataUrl) > -1) {
     e.respondWith(
       caches.open(dataCacheName).then(function(cache) {
