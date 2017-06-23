@@ -1,0 +1,37 @@
+.future
+  display: flex
+
+.future__oneday
+  flex-grow: 1
+  text-align: center
+
+.future__date
+  font-size: 1.2em
+
+.future__icon
+  background-repeat: no-repeat
+  background-size: contain
+
+  width: 64px
+  height: 64px
+  margin-left: auto
+  margin-right: auto
+
+.future__temp--high,
+.future__temp--low
+  display: inline-block
+
+.future__temp--low
+  color: #888
+
+@media (max-width: 450px)
+  .future__date
+    font-size: 0.9em
+
+  .future__icon
+    width: 32px
+    height: 32px
+
+  .future__temp--high,
+  .future__temp--low
+    display: block

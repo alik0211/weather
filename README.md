@@ -8,4 +8,4 @@ Application for all devices.
 - Offline functionality
 
 ## Screenshot
-![Screenshot](https://pp.userapi.com/c637623/v637623802/56765/urgl0QawA_4.jpg)
+![Screenshot](https://pp.userapi.com/c639831/v639831978/29067/Uk_9UmnrnHw.jpg)

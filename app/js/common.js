@@ -4,7 +4,8 @@
   const app = {
     city: undefined,
     spinner: document.querySelector('.loader'),
-    dialog: document.querySelector('.dialog')
+    dialog: document.querySelector('.dialog'),
+    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   };
 
   document.querySelector('.card__location').addEventListener('click', () => {
@@ -15,7 +16,7 @@
   document.getElementById('butSetCity').addEventListener('click', () => {
     app.city = document.getElementById('city').value;
     app.toggleDialog(false);
-    app.getWeather(app.city);
+    app.getForecast(app.city);
     localStorage.city = app.city;
   });
 
@@ -27,13 +28,14 @@
     }
   };
 
-  app.getWeather = function(city) {
-    const url = 'https://alik0211.tk/weather0211/data.php?city=' + city;
+  app.getForecast = function(city) {
+    const url = 'https://alik0211.tk/weather0211/forecast.daily.php?city=' +
+          city;
 
     if ('caches' in window) {
       caches.match(url).then(response => {
         if (response) {
-          response.json().then(data => app.updateWeather(data));
+          response.json().then(data => app.updateForecast(data));
         }
       });
     }
@@ -42,28 +44,45 @@
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         let data = JSON.parse(xhr.response);
-        app.updateWeather(data);
+        app.updateForecast(data);
       }
     });
     xhr.open('GET', url);
     xhr.send();
   };
 
-  app.updateWeather = function(data) {
+  app.updateForecast = function(data) {
+    const list = data.list;
+    const current = data.list[0];
     const card = document.querySelector('.card');
 
-    card.querySelector('.card__location').textContent = data.name;
+    card.querySelector('.card__location').textContent = data.city.name;
     card.querySelector('.card__description').textContent =
-      data.weather[0].description;
-
+      current.weather[0].description;
     card.querySelector('.visual__value').textContent =
-      Math.round(data.main.temp);
+      Math.round(current.temp.day);
     card.querySelector('.visual__icon').style.backgroundImage =
-      `url("images/${data.weather[0].icon}.svg")`;
+      `url("images/${current.weather[0].icon}.svg")`;
     card.querySelector('.description__wind .description__value').textContent =
-      Math.round(data.wind.speed);
+      Math.round(current.speed);
     card.querySelector('.description__clouds .description__value').textContent =
-      data.clouds.all;
+      current.clouds;
+
+    const nextDays = card.querySelectorAll('.future__oneday');
+    let today = new Date();
+    today = today.getDay();
+    nextDays.forEach(function(nextDay, i) {
+      const day = app.daysOfWeek[(i + today) % 7];
+      const future = list[++i];
+
+      nextDay.querySelector('.future__date').textContent = day;
+      nextDay.querySelector('.future__icon').style.backgroundImage =
+        `url("images/${future.weather[0].icon}.svg")`;
+      nextDay.querySelector('.future__temp--high .future__value').textContent =
+        Math.round(future.temp.max);
+      nextDay.querySelector('.future__temp--low .future__value').textContent =
+        Math.round(future.temp.min);
+    });
 
     app.spinner.setAttribute('hidden', true);
   };
@@ -74,7 +93,7 @@
   if (app.city === undefined) {
     app.toggleDialog(true);
   } else {
-    app.getWeather(app.city);
+    app.getForecast(app.city);
   }
 
   if ('serviceWorker' in navigator) {
