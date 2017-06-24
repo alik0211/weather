@@ -3,18 +3,19 @@
 
   const app = {
     city: undefined,
+    cityElement: document.getElementById('city'),
     spinner: document.querySelector('.loader'),
     dialog: document.querySelector('.dialog'),
     daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   };
 
   document.querySelector('.card__location').addEventListener('click', () => {
-    document.getElementById('city').value = app.city;
+    app.cityElement.value = app.city;
     app.toggleDialog(true);
   });
 
   document.getElementById('butSetCity').addEventListener('click', () => {
-    app.city = document.getElementById('city').value;
+    app.city = app.cityElement.value;
     app.toggleDialog(false);
     app.getForecast(app.city);
     localStorage.city = app.city;
@@ -23,6 +24,7 @@
   app.toggleDialog = function(visible) {
     if (visible) {
       app.dialog.classList.add('dialog--open');
+      app.cityElement.focus();
     } else {
       app.dialog.classList.remove('dialog--open');
     }
