@@ -89,7 +89,6 @@
     app.spinner.setAttribute('hidden', true);
   };
 
-
   app.city = localStorage.city;
 
   if (app.city === undefined) {
@@ -103,7 +102,7 @@
       .then(() => {
         console.log('Service Worker Registered');
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('Service Worker Filed to Register', err);
       });
   }
