@@ -2,3 +2,5 @@ node_modules
 package-lock.json
 app/css
 dist
+.firebaserc
+firebase.json
