@@ -36,7 +36,7 @@
 
     if ('caches' in window) {
       caches.match(url).then(response => {
-        if (response) {
+        if (response !== undefined) {
           response.json().then(data => app.updateForecast(data));
         }
       });
