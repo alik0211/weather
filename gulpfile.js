@@ -2,6 +2,7 @@ const del          = require('del'),
       gulp         = require('gulp'),
       sass         = require('gulp-sass'),
       babel        = require('gulp-babel'),
+      notify       = require("gulp-notify"),
       uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
@@ -20,7 +21,7 @@ gulp.task('browser-sync', function() {
 
 gulp.task('sass', function() {
   return gulp.src('app/sass/main.sass')
-           .pipe(sass())
+           .pipe(sass()).on('error', notify.onError())
            .pipe(autoprefixer(['last 10 versions']))
            .pipe(gulp.dest('app/css'));
 });
