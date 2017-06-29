@@ -9,7 +9,7 @@ const del          = require('del'),
       browserSync  = require('browser-sync'),
       autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('browser-sync', function() {
+gulp.task('serve', function() {
   browserSync({
     server: {
       baseDir: 'app'
@@ -21,16 +21,16 @@ gulp.task('browser-sync', function() {
 
 gulp.task('sass', function() {
   return gulp.src('app/sass/main.sass')
-           .pipe(sass()).on('error', notify.onError())
-           .pipe(autoprefixer(['last 10 versions']))
-           .pipe(gulp.dest('app/css'));
+    .pipe(sass()).on('error', notify.onError())
+    .pipe(autoprefixer(['last 10 versions']))
+    .pipe(gulp.dest('app/css'));
 });
 
-gulp.task('removedist', function() {
+gulp.task('clean', function() {
   return del.sync('dist');
 });
 
-gulp.task('build', ['removedist', 'sass'], function() {
+gulp.task('build', ['clean', 'sass'], function() {
   gulp.src('app/css/main.css')
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
     .pipe(gulp.dest('dist/css'));
@@ -52,7 +52,7 @@ gulp.task('build', ['removedist', 'sass'], function() {
   ]).pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['browser-sync', 'sass'], function() {
+gulp.task('watch', ['serve', 'sass'], function() {
   gulp.watch('app/sass/**/*.sass', ['sass', browserSync.reload]);
   gulp.watch('app/js/*.js', browserSync.reload);
   gulp.watch('app/*.html', browserSync.reload);
