@@ -2,8 +2,10 @@ const del          = require('del'),
       gulp         = require('gulp'),
       sass         = require('gulp-sass'),
       babel        = require('gulp-babel'),
+      rename       = require('gulp-rename'),
       notify       = require("gulp-notify"),
       uglify       = require('gulp-uglify'),
+      useref       = require('gulp-useref'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
       browserSync  = require('browser-sync'),
@@ -20,7 +22,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src('app/sass/main.sass')
+  return gulp.src('app/sass/*.sass')
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
     .pipe(gulp.dest('app/css'));
@@ -31,28 +33,31 @@ gulp.task('clean', function() {
 });
 
 gulp.task('build', ['clean', 'sass'], function() {
-  gulp.src('app/css/main.css')
+  gulp.src('app/*.html')
+    .pipe(useref())
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist'));
+
+  gulp.src('app/css/*.css')
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/css'));
 
   gulp.src('app/js/*.js')
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/js'));
 
-  gulp.src('app/*.html')
-    .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest('dist'));
-
   gulp.src([
-    'app/**/*.svg',
     'app/**/*.png',
+    'app/**/*.svg',
     'app/manifest.json',
     'app/sw.js'
   ]).pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['serve', 'sass'], function() {
+gulp.task('watch', ['sass', 'serve'], function() {
   gulp.watch('app/sass/**/*.sass', ['sass', browserSync.reload]);
   gulp.watch('app/js/*.js', browserSync.reload);
   gulp.watch('app/*.html', browserSync.reload);
