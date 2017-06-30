@@ -5,9 +5,9 @@ const del          = require('del'),
       rename       = require('gulp-rename'),
       notify       = require("gulp-notify"),
       uglify       = require('gulp-uglify'),
-      useref       = require('gulp-useref'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
+      htmlreplace  = require('gulp-html-replace'),
       browserSync  = require('browser-sync'),
       autoprefixer = require('gulp-autoprefixer');
 
@@ -44,7 +44,10 @@ gulp.task('clean', function() {
 
 gulp.task('build', ['clean', 'sass'], function() {
   gulp.src('app/*.html')
-    .pipe(useref())
+    .pipe(htmlreplace({
+      css: 'css/main.min.css',
+      js: 'js/main.min.js'
+    }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
 
@@ -68,9 +71,9 @@ gulp.task('build', ['clean', 'sass'], function() {
 });
 
 gulp.task('watch', ['sass', 'serve'], function() {
+  gulp.watch('app/*.html', browserSync.reload);
   gulp.watch('app/sass/**/*.sass', ['sass', browserSync.reload]);
   gulp.watch('app/js/*.js', browserSync.reload);
-  gulp.watch('app/*.html', browserSync.reload);
 });
 
 gulp.task('default', ['watch']);
