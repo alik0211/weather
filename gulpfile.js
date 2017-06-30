@@ -16,6 +16,16 @@ gulp.task('serve', function() {
     server: {
       baseDir: 'app'
     },
+    port: 7777,
+    notify: false
+  });
+});
+
+gulp.task('serve:dist', ['build'], function() {
+  browserSync({
+    server: {
+      baseDir: 'dist'
+    },
     port: 7778,
     notify: false
   });
