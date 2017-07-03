@@ -3,10 +3,14 @@
 
   const app = {
     city: undefined,
+    data: null,
+    card: document.querySelector('.card'),
     cityElement: document.getElementById('city'),
     spinner: document.querySelector('.loader'),
     dialog: document.querySelector('.dialog'),
-    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    selectedDay: document.querySelector('.future__oneday--selected'),
+    nextDays: document.querySelectorAll('.future__oneday'),
+    daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   };
 
   document.querySelector('.card__location').addEventListener('click', () => {
@@ -19,6 +23,20 @@
     app.toggleDialog(false);
     app.getForecast(app.city);
     localStorage.city = app.city;
+  });
+
+  document.querySelectorAll('.future__oneday').forEach(function(day) {
+    day.addEventListener('click', e => {
+      e.path.forEach(function(element) {
+        if (element.className === 'future__oneday') {
+          app.selectedDay.classList.remove('future__oneday--selected');
+          element.classList.add('future__oneday--selected');
+          app.selectedDay = element;
+
+          return app.setDay(element.getAttribute('data-day-id'));
+        }
+      });
+    });
   });
 
   app.toggleDialog = function(visible) {
@@ -54,11 +72,38 @@
   };
 
   app.updateForecast = function(data) {
-    const list = data.list;
-    const current = data.list[0];
-    const card = document.querySelector('.card');
+    app.data = data;
+    const card = app.card;
 
     card.querySelector('.card__location').textContent = data.city.name;
+
+    const nextDays = card.querySelectorAll('.future__oneday');
+    let today = new Date();
+    today = today.getDay();
+
+    nextDays.forEach(function(nextDay, i) {
+      const day = app.daysOfWeek[(i + today) % 7];
+      const future = data.list[i];
+
+      nextDay.setAttribute('data-day-id', i);
+      nextDay.querySelector('.future__date').textContent = day;
+      nextDay.querySelector('.future__icon').style.backgroundImage =
+        `url("images/${future.weather[0].icon}.svg")`;
+      nextDay.querySelector('.future__temp--high .future__value').textContent =
+        Math.round(future.temp.max);
+      nextDay.querySelector('.future__temp--low .future__value').textContent =
+        Math.round(future.temp.min);
+    });
+
+    app.setDay(0);
+
+    app.spinner.setAttribute('hidden', true);
+  };
+
+  app.setDay = function(dayId) {
+    const current = app.data.list[dayId];
+    const card = app.card;
+
     card.querySelector('.card__description').textContent =
       current.weather[0].description;
     card.querySelector('.visual__value').textContent =
@@ -69,24 +114,6 @@
       Math.round(current.speed);
     card.querySelector('.description__clouds .description__value').textContent =
       current.clouds;
-
-    const nextDays = card.querySelectorAll('.future__oneday');
-    let today = new Date();
-    today = today.getDay();
-    nextDays.forEach(function(nextDay, i) {
-      const day = app.daysOfWeek[(i + today) % 7];
-      const future = list[++i];
-
-      nextDay.querySelector('.future__date').textContent = day;
-      nextDay.querySelector('.future__icon').style.backgroundImage =
-        `url("images/${future.weather[0].icon}.svg")`;
-      nextDay.querySelector('.future__temp--high .future__value').textContent =
-        Math.round(future.temp.max);
-      nextDay.querySelector('.future__temp--low .future__value').textContent =
-        Math.round(future.temp.min);
-    });
-
-    app.spinner.setAttribute('hidden', true);
   };
 
   app.city = localStorage.city;

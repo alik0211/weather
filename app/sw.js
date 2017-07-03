@@ -1,5 +1,5 @@
 const dataCacheName = 'weatherData-v2';
-const cacheName = 'weather-v22';
+const cacheName = 'weather-v23';
 const filesToCache = [
   '/',
   '/index.html',
