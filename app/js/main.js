@@ -5,11 +5,11 @@
     city: undefined,
     data: null,
     card: document.querySelector('.card'),
-    cityElement: document.getElementById('city'),
-    spinner: document.querySelector('.loader'),
     dialog: document.querySelector('.dialog'),
-    selectedDay: document.querySelector('.future__oneday--selected'),
+    spinner: document.querySelector('.loader'),
     nextDays: document.querySelectorAll('.future__oneday'),
+    selectedDay: document.querySelector('.future__oneday--selected'),
+    cityElement: document.getElementById('city'),
     daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   };
 
@@ -25,9 +25,9 @@
     localStorage.city = app.city;
   });
 
-  app.nextDays.forEach(function(day) {
+  app.nextDays.forEach(day => {
     day.addEventListener('click', e => {
-      e.path.forEach(function(element) {
+      e.path.forEach(element => {
         if (element.className === 'future__oneday') {
           app.selectedDay.classList.remove('future__oneday--selected');
           element.classList.add('future__oneday--selected');
