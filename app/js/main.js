@@ -13,7 +13,7 @@
     daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   };
 
-  document.querySelector('.card__location').addEventListener('click', () => {
+  app.card.querySelector('.card__location').addEventListener('click', () => {
     app.cityElement.value = app.city;
     app.toggleDialog(true);
   });
@@ -25,7 +25,7 @@
     localStorage.city = app.city;
   });
 
-  document.querySelectorAll('.future__oneday').forEach(function(day) {
+  app.nextDays.forEach(function(day) {
     day.addEventListener('click', e => {
       e.path.forEach(function(element) {
         if (element.className === 'future__oneday') {
