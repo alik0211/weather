@@ -95,6 +95,9 @@
         Math.round(future.temp.min);
     });
 
+    app.selectedDay.classList.remove('future__oneday--selected');
+    app.nextDays[0].classList.add('future__oneday--selected');
+    app.selectedDay = app.nextDays[0];
     app.setDay(0);
 
     app.spinner.setAttribute('hidden', true);
