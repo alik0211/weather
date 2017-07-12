@@ -15,12 +15,12 @@
 
   app.card.querySelector('.card__location').addEventListener('click', () => {
     app.cityElement.value = app.city;
-    app.toggleDialog(true);
+    app.toggleDialog();
   });
 
   document.getElementById('butSetCity').addEventListener('click', () => {
     app.city = app.cityElement.value;
-    app.toggleDialog(false);
+    app.toggleDialog();
     app.getForecast(app.city);
     localStorage.city = app.city;
   });
@@ -39,13 +39,8 @@
     });
   });
 
-  app.toggleDialog = function(visible) {
-    if (visible) {
-      app.dialog.classList.add('dialog--open');
-      app.cityElement.focus();
-    } else {
-      app.dialog.classList.remove('dialog--open');
-    }
+  app.toggleDialog = function() {
+    app.dialog.classList.toggle('dialog--open');
   };
 
   app.getForecast = function(city) {
@@ -122,7 +117,7 @@
   app.city = localStorage.city;
 
   if (app.city === undefined) {
-    app.toggleDialog(true);
+    app.toggleDialog();
   } else {
     app.getForecast(app.city);
   }
