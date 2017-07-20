@@ -2,6 +2,7 @@ const del          = require('del'),
       gulp         = require('gulp'),
       sass         = require('gulp-sass'),
       babel        = require('gulp-babel'),
+      concat       = require('gulp-concat'),
       notify       = require("gulp-notify"),
       uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
@@ -50,6 +51,7 @@ gulp.task('build', ['clean', 'sass'], function() {
     .pipe(gulp.dest('dist/css'));
 
   gulp.src('app/js/*.js')
+    .pipe(concat('main.js'))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
