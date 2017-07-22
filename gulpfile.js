@@ -8,7 +8,9 @@ const del          = require('del'),
       uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
+      removeHtml   = require('gulp-remove-html'),
       browserSync  = require('browser-sync'),
+      styleInject  = require("gulp-style-inject"),
       autoprefixer = require('gulp-autoprefixer');
 
 function generateHash(length) {
@@ -42,10 +44,18 @@ gulp.task('serve:dist', ['build'], function() {
   });
 });
 
-gulp.task('sass', function() {
+gulp.task('sass:dev', function() {
   return gulp.src('app/sass/*.sass')
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
+    .pipe(gulp.dest('app/css'));
+});
+
+gulp.task('sass:prod', function() {
+  return gulp.src('app/sass/*.sass')
+    .pipe(sass()).on('error', notify.onError())
+    .pipe(autoprefixer(['last 10 versions']))
+    .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
     .pipe(gulp.dest('app/css'));
 });
 
@@ -53,14 +63,12 @@ gulp.task('clean', function() {
   return del.sync('dist');
 });
 
-gulp.task('build', ['clean', 'sass'], function() {
+gulp.task('build', ['clean', 'sass:prod'], function() {
   gulp.src('app/*.html')
+    .pipe(removeHtml())
+    .pipe(styleInject())
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
-
-  gulp.src('app/css/*.css')
-    .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
-    .pipe(gulp.dest('dist/css'));
 
   gulp.src('app/js/*.js')
     .pipe(concat('main.js'))
@@ -79,9 +87,9 @@ gulp.task('build', ['clean', 'sass'], function() {
   ]).pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['sass', 'serve'], function() {
+gulp.task('watch', ['sass:dev', 'serve'], function() {
   gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/sass/**/*.sass', ['sass', browserSync.reload]);
+  gulp.watch('app/sass/**/*.sass', ['sass:dev', browserSync.reload]);
   gulp.watch('app/js/*.js', browserSync.reload);
 });
 
