@@ -67,11 +67,10 @@ app.getForecast = function(city) {
 
 app.updateForecast = function(data) {
   app.data = data;
-  const card = app.card;
+  const { card, nextDays } = app;
 
   card.querySelector('.card__location').textContent = data.city.name;
 
-  const nextDays = card.querySelectorAll('.future__oneday');
   let today = new Date();
   today = today.getDay();
 
@@ -99,7 +98,7 @@ app.updateForecast = function(data) {
 
 app.setDay = function(dayId) {
   const current = app.data.list[dayId];
-  const card = app.card;
+  const { card } = app;
 
   card.querySelector('.card__description').textContent =
     current.weather[0].description;
