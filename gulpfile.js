@@ -4,13 +4,13 @@ const del          = require('del'),
       babel        = require('gulp-babel'),
       concat       = require('gulp-concat'),
       inject       = require('gulp-inject-string'),
-      notify       = require("gulp-notify"),
+      notify       = require('gulp-notify'),
       uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
       removeHtml   = require('gulp-remove-html'),
       browserSync  = require('browser-sync'),
-      styleInject  = require("gulp-style-inject"),
+      styleInject  = require('gulp-style-inject'),
       autoprefixer = require('gulp-autoprefixer');
 
 function generateHash(length) {
