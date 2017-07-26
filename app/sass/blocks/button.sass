@@ -1,58 +1,66 @@
 .button
+  position: relative
+  display: inline-block
+  overflow: hidden
+  box-sizing: border-box
+  padding: 0 16px
+  min-width: 64px
+  height: 36px
+  outline: none
+  border: none
+  border-radius: 2px
+  background: transparent
+  color: rgba(0, 0, 0, 0.87)
+  vertical-align: middle
+  text-align: center
+  text-decoration: none
+  text-transform: uppercase
+  letter-spacing: .04em
+  font-weight: 500
+  font-size: .875rem
+  font-size: 14px
   font-family: 'Roboto', 'Helvetica', sans-serif
+  line-height: 1.5rem
+  line-height: 36px
+
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
   will-change: transform,opacity
   -webkit-tap-highlight-color: transparent
-  font-size: .875rem
-  letter-spacing: .04em
-  line-height: 1.5rem
-  color: rgba(0, 0, 0, 0.87)
-  display: inline-block
-  position: relative
-  min-width: 64px
-  height: 36px
-  padding: 0 16px
-  border: none
-  border-radius: 2px
-  outline: none
-  background: transparent
-  font-size: 14px
-  font-weight: 500
-  line-height: 36px
-  text-align: center
-  text-decoration: none
-  text-transform: uppercase
-  overflow: hidden
-  vertical-align: middle
   user-select: none
-  box-sizing: border-box
   -webkit-appearance: none
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.18)
+
   &:active:after, &:focus:before, &:hover:before
-    transition-duration: 85ms
     opacity: .6
+    transition-duration: 85ms
+
   &:before, &:after
-    background-color: rgba(0, 0, 0, 0.06)
     position: absolute
     top: -50%
     left: -50%
     width: 200%
     height: 200%
-    transition: opacity .25s linear
     border-radius: 50%
-    opacity: 0
-    pointer-events: none
+    background-color: rgba(0, 0, 0, 0.06)
     content: ""
+    opacity: 0
+    transition: opacity .25s linear
+    pointer-events: none
+
   &:after
     transform-origin: center center
+
   &:active
     outline: none
+
   &:hover
     cursor: pointer
+
   &::-moz-focus-inner
     padding: 0
     border: 0
+
   &:disabled
     color: rgba(0, 0, 0, 0.26)
     cursor: default
