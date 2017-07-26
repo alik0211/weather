@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/alik0211/weather/issues"
   },
-  "homepage": "https://github.com/alik0211/weather#readme",
+  "homepage": "https://weather-b0235.firebaseapp.com/",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "browser-sync": "^2.18.12",
