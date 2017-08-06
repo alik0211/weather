@@ -1,0 +1,21 @@
+.temp__wrap
+  display: flex
+  justify-content: space-around
+  margin: 0 auto
+  width: 64px
+
+.temp--high,
+.temp--low
+  display: inline-block
+
+.temp--low
+  color: #888
+
+@media (max-width: 450px)
+  .temp__wrap
+    display: block
+    width: auto
+
+  .temp--high,
+  .temp--low
+    display: block

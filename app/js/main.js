@@ -82,9 +82,9 @@ app.updateForecast = function(data) {
     nextDay.querySelector('.future__date').textContent = day;
     nextDay.querySelector('.future__icon').style.backgroundImage =
       `url("images/${future.weather[0].icon}.svg")`;
-    nextDay.querySelector('.future__temp--high .future__value').textContent =
+    nextDay.querySelector('.temp--high .temp__value').textContent =
       Math.round(future.temp.max);
-    nextDay.querySelector('.future__temp--low .future__value').textContent =
+    nextDay.querySelector('.temp--low .temp__value').textContent =
       Math.round(future.temp.min);
   });
 
