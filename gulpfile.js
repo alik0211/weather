@@ -1,4 +1,5 @@
 const del          = require('del'),
+      pkg          = require('./package.json'),
       gulp         = require('gulp'),
       sass         = require('gulp-sass'),
       babel        = require('gulp-babel'),
@@ -13,17 +14,6 @@ const del          = require('del'),
       browserSync  = require('browser-sync'),
       styleInject  = require('gulp-style-inject'),
       autoprefixer = require('gulp-autoprefixer');
-
-function generateHash(length) {
-  let hash = '';
-  const possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < length; i++) {
-    hash += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-
-  return hash;
-}
 
 gulp.task('serve', function() {
   browserSync({
@@ -80,7 +70,7 @@ gulp.task('build', ['clean', 'sass:prod'], function() {
     .pipe(gulp.dest('dist/js'));
 
   gulp.src('app/sw.js')
-    .pipe(inject.replace('cacheNameVersion', generateHash(6)))
+    .pipe(inject.replace('cacheNameVersion', pkg.version))
     .pipe(gulp.dest('dist'));
 
   gulp.src([
