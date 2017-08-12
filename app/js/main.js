@@ -26,15 +26,11 @@ document.getElementById('butSetCity').addEventListener('click', () => {
 
 app.nextDays.forEach(day => {
   day.addEventListener('click', e => {
-    e.path.forEach(element => {
-      if (element.className === 'future__oneday') {
-        app.selectedDay.classList.remove('future__oneday--selected');
-        element.classList.add('future__oneday--selected');
-        app.selectedDay = element;
+    app.selectedDay.classList.remove('future__oneday--selected');
+    day.classList.add('future__oneday--selected');
+    app.selectedDay = day;
 
-        return app.setDay(element.getAttribute('data-day-id'));
-      }
-    });
+    return app.setDay(day.getAttribute('data-day-id'));
   });
 });
 
