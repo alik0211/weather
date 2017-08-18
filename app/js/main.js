@@ -39,8 +39,7 @@ app.toggleDialog = function() {
 };
 
 app.getForecast = function(city) {
-  const url =
-    `https://alik0211.tk/weather0211/forecast.daily.php?city=${city}`;
+  const url = `https://alik0211.ru/weather/data.php?city=${city}`;
 
   if ('caches' in window) {
     caches.match(url).then(response => {
