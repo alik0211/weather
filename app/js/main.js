@@ -8,7 +8,7 @@ app.dialog = document.querySelector('.dialog');
 app.spinner = document.querySelector('.loader');
 app.nextDays = app.card.querySelectorAll('.future__oneday');
 app.selectedDay = app.card.querySelector('.future__oneday--selected');
-app.cityElement = document.getElementById('city');
+app.cityElement = app.dialog.querySelector('.textfield__input');
 app.daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 app.card.querySelector('.card__location').addEventListener('click', () => {
