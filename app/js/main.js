@@ -1,16 +1,15 @@
 'use strict';
 
-const app = {
-  city: undefined,
-  data: null,
-  card: document.querySelector('.card'),
-  dialog: document.querySelector('.dialog'),
-  spinner: document.querySelector('.loader'),
-  nextDays: document.querySelectorAll('.future__oneday'),
-  selectedDay: document.querySelector('.future__oneday--selected'),
-  cityElement: document.getElementById('city'),
-  daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-};
+const app = {};
+app.city = undefined;
+app.data = null;
+app.card = document.querySelector('.card');
+app.dialog = document.querySelector('.dialog');
+app.spinner = document.querySelector('.loader');
+app.nextDays = app.card.querySelectorAll('.future__oneday');
+app.selectedDay = app.card.querySelector('.future__oneday--selected');
+app.cityElement = document.getElementById('city');
+app.daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 app.card.querySelector('.card__location').addEventListener('click', () => {
   app.cityElement.value = app.city;
