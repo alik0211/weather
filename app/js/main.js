@@ -17,7 +17,7 @@ app.card.querySelector('.card__location').addEventListener('click', () => {
   app.toggleDialog();
 });
 
-document.getElementById('butSetCity').addEventListener('click', () => {
+app.dialog.querySelector('.dialog__button').addEventListener('click', () => {
   app.city = app.cityElement.value;
   app.toggleDialog();
   app.getForecast(app.city);
