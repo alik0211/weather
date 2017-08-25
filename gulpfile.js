@@ -9,10 +9,10 @@ const del          = require('del'),
       uglify       = require('gulp-uglify'),
       htmlmin      = require('gulp-htmlmin'),
       cleanCSS     = require('gulp-clean-css'),
+      injectCSS    = require('gulp-inject-css'),
       removeHtml   = require('gulp-remove-html'),
       sourcemaps   = require('gulp-sourcemaps'),
       browserSync  = require('browser-sync'),
-      styleInject  = require('gulp-style-inject'),
       autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('serve', function() {
@@ -59,7 +59,7 @@ gulp.task('clean', function() {
 gulp.task('build', ['clean', 'sass:prod'], function() {
   gulp.src('app/*.html')
     .pipe(removeHtml())
-    .pipe(styleInject())
+    .pipe(injectCSS())
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
 
