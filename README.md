@@ -1,4 +1,4 @@
-# Weather ![Vanilla JS](https://habrastorage.org/getpro/habr/post_images/4fb/406/cdb/4fb406cdb84c4aa137f51504efb264d2.png)
+# Weather ![Vanilla JS](http://vanilla-js.com/assets/button.png)
 
 Application for all devices.
 
