@@ -1,6 +1,6 @@
 # Weather ![Vanilla JS](http://vanilla-js.com/assets/button.png)
 
-[![devDependency Status](https://img.shields.io/david/dev/alik0211/weather.svg?label=devDeps&style=flat-square)](https://david-dm.org/alik0211/weather#info=devDependencies)
+[![devDependency Status](https://img.shields.io/david/dev/alik0211/weather.svg?label=devDeps&style=flat-square)](https://david-dm.org/alik0211/weather?type=dev)
 
 Application for all devices.
 
