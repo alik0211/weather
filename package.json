@@ -1,6 +1,6 @@
 {
   "name": "weather",
-  "version": "1.11.11",
+  "version": "1.11.12",
   "description": "Application for all devices",
   "scripts": {
     "start": "gulp",
@@ -25,7 +25,7 @@
     "gulp-babel": "^7.0.0",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",
-    "gulp-htmlmin": "^3.0.0",
+    "gulp-htmlmin": "^4.0.0",
     "gulp-inject-css": "^0.3.8",
     "gulp-inject-string": "^1.1.0",
     "gulp-notify": "^3.0.0",
