@@ -1,6 +1,6 @@
 {
   "name": "weather",
-  "version": "1.11.13",
+  "version": "1.11.14",
   "description": "Application for all devices",
   "scripts": {
     "start": "gulp",
@@ -21,7 +21,7 @@
     "browser-sync": "^2.23.5",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
+    "gulp-autoprefixer": "^4.1.0",
     "gulp-babel": "^7.0.0",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",
