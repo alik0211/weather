@@ -1,5 +1,6 @@
 {
   "name": "weather",
+  "private": true,
   "version": "1.11.23",
   "description": "Progressive Weather App",
   "scripts": {
