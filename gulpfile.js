@@ -65,7 +65,7 @@ gulp.task('build', ['clean', 'sass:prod'], function() {
 
   gulp.src('app/js/*.js')
     .pipe(concat('main.js'))
-    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(babel({ presets: ['@babel/env'] }))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 
