@@ -18,7 +18,7 @@ const del          = require('del'),
 gulp.task('serve', function() {
   browserSync({
     server: {
-      baseDir: 'app'
+      baseDir: 'src'
     },
     port: 7777,
     notify: false
@@ -36,20 +36,20 @@ gulp.task('serve:dist', ['build'], function() {
 });
 
 gulp.task('sass:dev', function() {
-  return gulp.src('app/sass/*.sass')
+  return gulp.src('src/sass/*.sass')
     .pipe(sourcemaps.init())
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('app/css'));
+    .pipe(gulp.dest('src/css'));
 });
 
 gulp.task('sass:prod', function() {
-  return gulp.src('app/sass/*.sass')
+  return gulp.src('src/sass/*.sass')
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
-    .pipe(gulp.dest('app/css'));
+    .pipe(gulp.dest('src/css'));
 });
 
 gulp.task('clean', function() {
@@ -57,33 +57,33 @@ gulp.task('clean', function() {
 });
 
 gulp.task('build', ['clean', 'sass:prod'], function() {
-  gulp.src('app/*.html')
+  gulp.src('src/*.html')
     .pipe(removeHtml())
     .pipe(injectCSS())
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
 
-  gulp.src('app/js/*.js')
+  gulp.src('src/js/*.js')
     .pipe(concat('main.js'))
     .pipe(babel({ presets: ['@babel/env'] }))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 
-  gulp.src('app/sw.js')
+  gulp.src('src/sw.js')
     .pipe(inject.replace('cacheNameVersion', pkg.version))
     .pipe(gulp.dest('dist'));
 
   gulp.src([
-    'app/**/*.png',
-    'app/**/*.svg',
-    'app/manifest.json'
+    'src/**/*.png',
+    'src/**/*.svg',
+    'src/manifest.json'
   ]).pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', ['sass:dev', 'serve'], function() {
-  gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/sass/**/*.sass', ['sass:dev', browserSync.reload]);
-  gulp.watch('app/js/*.js', browserSync.reload);
+  gulp.watch('src/*.html', browserSync.reload);
+  gulp.watch('src/sass/**/*.sass', ['sass:dev', browserSync.reload]);
+  gulp.watch('src/js/*.js', browserSync.reload);
 });
 
 gulp.task('default', ['watch']);
