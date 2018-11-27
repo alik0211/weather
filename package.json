@@ -28,7 +28,7 @@
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-inject-css": "^1.0.0",
+    "gulp-inject-css": "^2.0.0",
     "gulp-inject-string": "^1.1.1",
     "gulp-notify": "^3.2.0",
     "gulp-remove-html": "^1.3.0",
