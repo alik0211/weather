@@ -15,10 +15,10 @@ const del          = require('del'),
       browserSync  = require('browser-sync'),
       autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('serve', function() {
+gulp.task('serve:dev', function() {
   browserSync({
     server: {
-      baseDir: 'src'
+      baseDir: 'tmp'
     },
     port: 7777,
     notify: false
@@ -41,7 +41,7 @@ gulp.task('sass:dev', function() {
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('src/css'));
+    .pipe(gulp.dest('tmp/css'));
 });
 
 gulp.task('sass:prod', function() {
@@ -49,15 +49,37 @@ gulp.task('sass:prod', function() {
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
-    .pipe(gulp.dest('src/css'));
+    .pipe(gulp.dest('tmp/css'));
 });
 
-gulp.task('clean', function() {
+gulp.task('scripts:dev', function() {
+  return gulp.src('src/js/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('tmp/js'));
+});
+
+gulp.task('html:dev', function() {
+  return gulp.src('src/*.html').pipe(gulp.dest('tmp'));
+});
+
+gulp.task('assets:dev', function() {
+  return gulp.src([
+    'src/**/*.png',
+    'src/**/*.svg',
+    'src/manifest.json'
+  ]).pipe(gulp.dest('tmp'));
+});
+
+gulp.task('clean:tmp', function() {
+  return del.sync('tmp');
+});
+
+gulp.task('clean:dist', function() {
   return del.sync('dist');
 });
 
-gulp.task('build', ['clean', 'sass:prod'], function() {
-  gulp.src('src/*.html')
+gulp.task('build', ['clean:dist', 'sass:prod', 'html:dev'], function() {
+  gulp.src('tmp/*.html')
     .pipe(removeHtml())
     .pipe(injectCSS())
     .pipe(htmlmin({ collapseWhitespace: true }))
@@ -65,7 +87,7 @@ gulp.task('build', ['clean', 'sass:prod'], function() {
 
   gulp.src('src/js/*.js')
     .pipe(concat('main.js'))
-    .pipe(babel({ presets: ['@babel/env'] }))
+    .pipe(babel())
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 
@@ -80,7 +102,7 @@ gulp.task('build', ['clean', 'sass:prod'], function() {
   ]).pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['sass:dev', 'serve'], function() {
+gulp.task('watch', ['clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'serve:dev'], function() {
   gulp.watch('src/*.html', browserSync.reload);
   gulp.watch('src/sass/**/*.sass', ['sass:dev', browserSync.reload]);
   gulp.watch('src/js/*.js', browserSync.reload);
