@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/alik0211/weather/issues"
   },
-  "homepage": "https://weather-b0235.firebaseapp.com/",
+  "homepage": "https://alik0211.github.io/weather/",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
