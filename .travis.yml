@@ -4,6 +4,8 @@ node_js:
 env:
   - API_KEY=$API_KEY
 
+cache: npm
+
 script: "npm run build"
 
 deploy:
