@@ -1,19 +1,19 @@
-const dataCacheName = 'weatherData-v3';
+const dataCacheName = 'weatherData-v4';
 const cacheName = 'weather-cacheNameVersion';
 const filesToCache = [
-  '/',
-  '/index.html',
-  '/js/main.js',
-  '/images/github.svg',
-  '/images/01d.svg', '/images/01n.svg',
-  '/images/02d.svg', '/images/02n.svg',
-  '/images/03d.svg', '/images/03n.svg',
-  '/images/04d.svg', '/images/04n.svg',
-  '/images/09d.svg', '/images/09n.svg',
-  '/images/10d.svg', '/images/10n.svg',
-  '/images/11d.svg', '/images/11n.svg',
-  '/images/13d.svg', '/images/13n.svg',
-  '/images/50d.svg', '/images/50n.svg'
+  './',
+  './index.html',
+  './js/main.js',
+  './images/github.svg',
+  './images/01d.svg', './images/01n.svg',
+  './images/02d.svg', './images/02n.svg',
+  './images/03d.svg', './images/03n.svg',
+  './images/04d.svg', './images/04n.svg',
+  './images/09d.svg', './images/09n.svg',
+  './images/10d.svg', './images/10n.svg',
+  './images/11d.svg', './images/11n.svg',
+  './images/13d.svg', './images/13n.svg',
+  './images/50d.svg', './images/50n.svg'
 ];
 
 self.addEventListener('install', function(e) {
@@ -44,7 +44,7 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
   console.log('[Service Worker] Fetch', e.request.url);
-  const dataUrl = 'https://alik0211.ru/weather/data.php';
+  const dataUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
   if (e.request.url.indexOf(dataUrl) > -1) {
     e.respondWith(
       caches.open(dataCacheName).then(function(cache) {
