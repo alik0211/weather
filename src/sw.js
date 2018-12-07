@@ -44,7 +44,7 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
   console.log('[Service Worker] Fetch', e.request.url);
-  const dataUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
+  const dataUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily';
   if (e.request.url.indexOf(dataUrl) > -1) {
     e.respondWith(
       caches.open(dataCacheName).then(function(cache) {

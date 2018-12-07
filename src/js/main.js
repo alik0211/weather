@@ -38,7 +38,7 @@ app.toggleDialog = function() {
 };
 
 app.getForecast = function(city) {
-  const url = `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${process.env.API_KEY}&units=metric&q=${city}`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast/daily?appid=${process.env.API_KEY}&units=metric&q=${city}`;
   if ('caches' in window) {
     caches.match(url).then(response => {
       if (response !== undefined) {
