@@ -4,7 +4,6 @@ const filesToCache = [
   './',
   './index.html',
   './js/main.js',
-  './images/github.svg',
   './images/01d.svg', './images/01n.svg',
   './images/02d.svg', './images/02n.svg',
   './images/03d.svg', './images/03n.svg',
