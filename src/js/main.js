@@ -16,7 +16,9 @@ app.card.querySelector('.card__location').addEventListener('click', () => {
   app.toggleDialog();
 });
 
-app.dialog.querySelector('.dialog__surface').addEventListener('submit', () => {
+app.dialog.querySelector('.dialog__surface').addEventListener('submit', event => {
+  event.preventDefault();
+
   app.city = app.cityElement.value;
   app.toggleDialog();
   app.getForecast(app.city);
