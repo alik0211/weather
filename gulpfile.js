@@ -103,9 +103,9 @@ gulp.task('build', ['clean:dist', 'sass:prod', 'html:dev'], function() {
 });
 
 gulp.task('watch', ['clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'serve:dev'], function() {
-  gulp.watch('src/*.html', browserSync.reload);
+  gulp.watch('src/*.html', ['html:dev', browserSync.reload]);
   gulp.watch('src/sass/**/*.sass', ['sass:dev', browserSync.reload]);
-  gulp.watch('src/js/*.js', browserSync.reload);
+  gulp.watch('src/js/*.js', ['js:dev', browserSync.reload]);
 });
 
 gulp.task('default', ['watch']);
