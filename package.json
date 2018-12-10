@@ -21,7 +21,7 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "browser-sync": "^2.23.5",
+    "browser-sync": "^2.26.3",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
