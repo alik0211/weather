@@ -15,6 +15,12 @@ const del          = require('del'),
       browserSync  = require('browser-sync'),
       autoprefixer = require('gulp-autoprefixer');
 
+gulp.task('reload', function(cb) {
+  browserSync.reload();
+
+  cb();
+});
+
 gulp.task('serve:dev', function() {
   browserSync({
     server: {
@@ -124,12 +130,14 @@ gulp.task('assets:prod', function() {
   ]).pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch('src/*.html', gulp.series('html:dev', browserSync.reload));
-  gulp.watch('src/sass/**/*.sass', gulp.series('sass:dev', browserSync.reload));
-  gulp.watch('src/js/*.js', gulp.series('js:dev', browserSync.reload));
+gulp.task('watch', function(cb) {
+  gulp.watch('src/*.html', gulp.series('html:dev', 'reload'));
+  gulp.watch('src/sass/**/*.sass', gulp.series('sass:dev', 'reload'));
+  gulp.watch('src/js/*.js', gulp.series('scripts:dev', 'reload'));
+
+  cb();
 });
 
 gulp.task('build', gulp.series('clean:dist', 'sass:prod', 'html:dev', 'html:prod', 'scripts:prod'));
 
-gulp.task('default', gulp.series('clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'serve:dev', 'watch'));
+gulp.task('default', gulp.series('clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'watch', 'serve:dev'));
