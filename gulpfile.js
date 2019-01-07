@@ -138,6 +138,6 @@ gulp.task('watch', function(cb) {
   cb();
 });
 
-gulp.task('build', gulp.series('clean:dist', 'sass:prod', 'html:dev', 'html:prod', 'scripts:prod'));
+gulp.task('build', gulp.series('clean:dist', 'html:dev', 'sass:prod', 'html:prod', 'scripts:prod'));
 
 gulp.task('default', gulp.series('clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'watch', 'serve:dev'));
