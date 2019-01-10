@@ -45,7 +45,7 @@ gulp.task('sass:dev', function(cb) {
   gulp.src('src/sass/*.sass')
     .pipe(sourcemaps.init())
     .pipe(sass()).on('error', notify.onError())
-    .pipe(autoprefixer(['last 10 versions']))
+    .pipe(autoprefixer())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('tmp/css'));
 
@@ -55,7 +55,7 @@ gulp.task('sass:dev', function(cb) {
 gulp.task('sass:prod', function() {
   return gulp.src('src/sass/*.sass')
     .pipe(sass()).on('error', notify.onError())
-    .pipe(autoprefixer(['last 10 versions']))
+    .pipe(autoprefixer())
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
     .pipe(gulp.dest('tmp/css'));
 });
