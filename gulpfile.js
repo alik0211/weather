@@ -52,14 +52,12 @@ gulp.task('sass:dev', function(cb) {
   cb();
 });
 
-gulp.task('sass:prod', function(cb) {
-  gulp.src('src/sass/*.sass')
+gulp.task('sass:prod', function() {
+  return gulp.src('src/sass/*.sass')
     .pipe(sass()).on('error', notify.onError())
     .pipe(autoprefixer(['last 10 versions']))
     .pipe(cleanCSS({ level: { 1: { specialComments: 0 }}}))
     .pipe(gulp.dest('tmp/css'));
-
-  cb();
 });
 
 gulp.task('scripts:dev', function(cb) {
@@ -70,10 +68,8 @@ gulp.task('scripts:dev', function(cb) {
   cb();
 });
 
-gulp.task('html:dev', function(cb) {
-  gulp.src('src/*.html').pipe(gulp.dest('tmp'));
-
-  cb();
+gulp.task('html:dev', function() {
+  return gulp.src('src/*.html').pipe(gulp.dest('tmp'));
 });
 
 gulp.task('assets:dev', function(cb) {
@@ -98,14 +94,12 @@ gulp.task('clean:dist', function(cb) {
   cb();
 });
 
-gulp.task('html:prod', function(cb) {
-  gulp.src('tmp/*.html')
+gulp.task('html:prod', function() {
+  return gulp.src('tmp/*.html')
     .pipe(removeHtml())
     .pipe(injectCSS())
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
-
-  cb();
 });
 
 gulp.task('scripts:prod', function(cb) {
@@ -138,6 +132,6 @@ gulp.task('watch', function(cb) {
   cb();
 });
 
-gulp.task('build', gulp.series('clean:dist', 'html:dev', 'sass:prod', 'html:prod', 'scripts:prod'));
+gulp.task('build', gulp.series('clean:dist', 'clean:tmp', 'sass:prod', 'html:dev', 'html:prod', 'scripts:prod'));
 
 gulp.task('default', gulp.series('clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'watch', 'serve:dev'));
