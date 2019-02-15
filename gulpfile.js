@@ -72,14 +72,12 @@ gulp.task('html:dev', function() {
   return gulp.src('src/*.html').pipe(gulp.dest('tmp'));
 });
 
-gulp.task('assets:dev', function(cb) {
-  gulp.src([
+gulp.task('assets:dev', function() {
+  return gulp.src([
     'src/**/*.png',
     'src/**/*.svg',
     'src/manifest.json'
   ]).pipe(gulp.dest('tmp'));
-
-  cb();
 });
 
 gulp.task('clean:tmp', function(cb) {
@@ -117,7 +115,7 @@ gulp.task('scripts:prod', function(cb) {
 });
 
 gulp.task('assets:prod', function() {
-  gulp.src([
+  return gulp.src([
     'src/**/*.png',
     'src/**/*.svg',
     'src/manifest.json'
@@ -132,6 +130,6 @@ gulp.task('watch', function(cb) {
   cb();
 });
 
-gulp.task('build', gulp.series('clean:dist', 'clean:tmp', 'sass:prod', 'html:dev', 'html:prod', 'scripts:prod'));
+gulp.task('build', gulp.series('clean:dist', 'clean:tmp', 'assets:prod', 'sass:prod', 'html:dev', 'html:prod', 'scripts:prod'));
 
 gulp.task('default', gulp.series('clean:tmp', 'assets:dev', 'sass:dev', 'html:dev', 'scripts:dev', 'watch', 'serve:dev'));
